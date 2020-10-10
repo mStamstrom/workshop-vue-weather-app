@@ -1,4 +1,4 @@
-# workshop-weahter-app
+# workshop-weather-app
 
 ## Project setup
 ```

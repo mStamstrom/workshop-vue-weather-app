@@ -1,18 +1,35 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <WeatherInput @search="searchForWeather" />
+    <WeatherDisplayer :forecast="forecast" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {getCurrentWeather, getWeatherForecast} from './util/Api';
+import WeatherInput from './components/WeatherInput.vue'
+import WeatherDisplayer from './components/WeatherDisplayer.vue'
 
 export default {
   name: 'App',
+  data: () => ({
+    forecast: {},
+  }),
   components: {
-    HelloWorld
+    WeatherInput,
+    WeatherDisplayer,
+  },
+  mounted() {
+    // fetch forecast for position
+  },
+  methods: {
+    async searchForWeather(city) {
+      const currentWeatherResponse = await getCurrentWeather(city);
+      const forecastResponse = await getWeatherForecast(currentWeatherResponse.id)
+      this.forecast = forecastResponse;
+    },
   }
+
 }
 </script>
 
@@ -24,5 +41,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 </style>
