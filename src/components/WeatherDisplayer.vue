@@ -7,32 +7,28 @@
       </div>
     </div>
     <div class="forecast-days">
-      <div v-for="dayForecast in getForecastsByDay" :key="dayForecast.dateString">
-        <span>{{dayForecast.day}}</span>
-        <div class="forecast-list">
-          <button v-for="weather in dayForecast.list" :key="weather.dt" @click="changeSelectedForecast(weather)" class="forecast-button">
-            <span>
-              {{ weather.time }}
-            </span>
-            <span>
-              {{ Math.round(weather.main.temp) }}°
-            </span>
-          </button>
-        </div>
-      </div>
+      <WeatherListItem
+        v-for="dayForecast in getForecastsByDay"
+        :key="dayForecast.dateString"
+        :dayForecast="dayForecast"
+        @changeSelectedForecast="changeSelectedForecast"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import {getForecastsByDay, getBackgroundClassForSelectedForecast} from '../util/WeatherListHelper';
-
+import {getBackgroundClassForSelectedForecast, getForecastsByDay} from '../util/WeatherDisplayerHelper';
+import WeatherListItem from './WeatherListItem';
 
 export default {
   name: 'Weather-displayer',
   data: () => ({
-    selectedForecast: undefined, // TODO: kolla om ok
+    selectedForecast: null, // TODO: kolla om ok
   }),
+  components: {
+    WeatherListItem,
+  },
   props: {
     forecast: Object,
   },
@@ -44,7 +40,6 @@ export default {
   computed: {
     backgroundClass() {
       return getBackgroundClassForSelectedForecast(this.selectedForecast)
-
     },
     getForecastsByDay() {
       return getForecastsByDay(this.forecast.list);
@@ -78,12 +73,6 @@ export default {
     overflow-x: auto;
   }
 
-  .forecast-list {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-right: 30px;
-  }
   body::after{
   /* preload background images*/
   position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
