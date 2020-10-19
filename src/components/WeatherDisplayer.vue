@@ -55,19 +55,21 @@ export default {
 
 <style scoped>
   .weather-displayer {
-    height: 100%;
+    height: calc(100% - 60px);
     width: 100%;
+    color: white;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .selected-forecast {
     font-size: 40vh;
   }
   .forecast-days {
-    /* grid-column-start: 2;
-    grid-column-end: 2;
-    grid-row: 3; */
     display: flex;
     justify-content: space-between;
     overflow-x: auto;

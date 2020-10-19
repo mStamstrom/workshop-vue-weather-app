@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span>{{dayForecast.day}}</span>
+    <span class="title">{{dayForecast.day}}</span>
     <div class="forecast-list">
       <button v-for="weather in dayForecast.list" :key="weather.dt" @click="onChangeSelectedForecast(weather)" class="forecast-button">
         <span>
@@ -38,11 +38,17 @@ export default {
 </script>
 
 <style scoped>
+  button {
+    cursor: pointer;
+  }
 
   .forecast-list {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     margin-right: 30px;
+  }
+  .title {
+    color: white;
   }
 </style>

@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style scoped>
+  form {
+    height: 60px;
+  }
   input {
     padding: 12px;
     margin: 4px;

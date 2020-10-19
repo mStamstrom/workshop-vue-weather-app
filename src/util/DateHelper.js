@@ -6,8 +6,8 @@ export function formatDate(unixDateTimeStamp) {
 }
 
 
-export function getDayFromDateString(dateString) {
-  const date = new Date(dateString);
+export function getDayFromDateString(unixDateTimeStamp) {
+  const date = new Date(unixDateTimeStamp*1000);
   const dayOfWeek = date.getDay();
   if (dayOfWeek === (new Date().getDay())) {
     return 'Today';
